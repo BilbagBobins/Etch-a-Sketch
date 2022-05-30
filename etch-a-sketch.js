@@ -8,19 +8,39 @@ function drawGrid(size) {
             gridCell.style.height = cellSize;
             gridCell.style.width =  cellSize;
             gridContainer.appendChild(gridCell);
-            black(gridCell);
-            rainbow(gridCell);
-            shading(gridCell);
         }
+        let grid = document.querySelectorAll('.cell');
+        grid.forEach(cell => cell.addEventListener('mouseenter', colorCell));
     }
 }
 
-function rainbow(gridCell) {
-    rainbowButton.addEventListener('click', () => {
-        gridCell.addEventListener('mouseenter', () => {
-            gridCell.style.backgroundColor = `${randomRGB()}`;
-        });
-    });
+// function selectGridCell() {
+//     let grid = document.querySelectorAll('.cell');
+//     grid.forEach(cell => cell.addEventListener('mouseenter', colorCell))
+// }
+
+function colorCell() {
+    if (color === 'black') {
+        this.style.backgroundColor = 'rgb(0, 0, 0)';
+    } else if (color === 'rainbow') {
+        this.style.backgroundColor = `${randomRGB()}`;
+    } else if (color === 'shading') {
+        const rgb = (this.style.backgroundColor);
+        // string-to-array code from:
+        // https://stackoverflow.com/questions/10970958/get-a-color- 
+            //component-from-an-rgb-string-in-javascript
+        let rgbArr = rgb.match(/\d+/g);
+        if (!rgbArr) {
+            rgbArr = [255, 255, 255];
+        }
+        for (i = 0; i < 3; i++) {
+            let rgbDarker = Math.floor(rgbArr[i] - (25));
+            if (rgbDarker < 0) {
+                rgbArr[i] = 0;
+            } else rgbArr[i] = rgbDarker;
+        }
+        this.style.backgroundColor = `rgb(${rgbArr.toString()})`;
+    };
 }
 
 function randomRGB() {
@@ -30,41 +50,6 @@ function randomRGB() {
     }
     return `rgb(${rgb.toString()})`;
 }
-
-function black(gridCell) {
-    blackButton.addEventListener('click', () => {
-        gridCell.addEventListener('mouseenter', () => {
-            gridCell.style.backgroundColor = 'black';
-        });
-    });
-}
-
-
-function shading(gridCell) {
-    shadingButton.addEventListener('click', () => {
-        gridCell.addEventListener('mouseenter', () => {
-            const rgb = (gridCell.style.backgroundColor);
-            // string-to-array code from:
-            // https://stackoverflow.com/questions/10970958/get-a-color- 
-                //component-from-an-rgb-string-in-javascript
-            let rgbArr = rgb.match(/\d+/g);
-            if (!rgbArr) {
-                rgbArr = [255, 255, 255];
-            }
-            for (i = 0; i < 3; i++) {
-                console.log('before', rgbArr[i]);
-                let rgbDarker = Math.floor(rgbArr[i] - (25));
-                if (rgbDarker < 0) {
-                    rgbArr[i] = 0;
-                } else rgbArr[i] = rgbDarker;
-                console.log('after',rgbArr[i]);
-            }
-            console.log('afterafter', rgbArr);
-            gridCell.style.backgroundColor = `rgb(${rgbArr.toString()})`;
-        });
-    });
-}
-
 
 const gridContainer = document.querySelector('.grid-container');
 const resizeButton = document.querySelector('#grid-size');
@@ -83,6 +68,10 @@ resizeButton.addEventListener('click', () => {
         gridContainer.removeChild(gridContainer.firstChild);
     drawGrid(newSize)
 });
+
+blackButton.addEventListener('click', () => color = 'black');
+rainbowButton.addEventListener('click', () => color = 'rainbow');
+shadingButton.addEventListener('click', () => color = 'shading');
 
 
 drawGrid(gridSize);
