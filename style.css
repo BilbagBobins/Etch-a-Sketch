@@ -3,14 +3,14 @@
 } */
 
 .cell {
-    border: solid grey 1px;
+    border: solid rgb(221, 221, 221) 1px;
 }
 
 
 .grid-container {
     display: flex;
     flex-wrap: wrap;
-    width: 960px;
-    height: 960px;
+    width: 880px;
+    height: 880px;
     border: solid rgb(255, 123, 0) 4px;
 }
