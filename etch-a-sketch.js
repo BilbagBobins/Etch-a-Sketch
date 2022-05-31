@@ -14,33 +14,14 @@ function drawGrid(size) {
     }
 }
 
-// function selectGridCell() {
-//     let grid = document.querySelectorAll('.cell');
-//     grid.forEach(cell => cell.addEventListener('mouseenter', colorCell))
-// }
-
 function colorCell() {
     if (color === 'black') {
         this.style.backgroundColor = 'rgb(0, 0, 0)';
     } else if (color === 'rainbow') {
         this.style.backgroundColor = `${randomRGB()}`;
     } else if (color === 'shading') {
-        const rgb = (this.style.backgroundColor);
-        // string-to-array code from:
-        // https://stackoverflow.com/questions/10970958/get-a-color- 
-            //component-from-an-rgb-string-in-javascript
-        let rgbArr = rgb.match(/\d+/g);
-        if (!rgbArr) {
-            rgbArr = [255, 255, 255];
-        }
-        for (i = 0; i < 3; i++) {
-            let rgbDarker = Math.floor(rgbArr[i] - (25));
-            if (rgbDarker < 0) {
-                rgbArr[i] = 0;
-            } else rgbArr[i] = rgbDarker;
-        }
-        this.style.backgroundColor = `rgb(${rgbArr.toString()})`;
-    };
+        this.style.backgroundColor = `${shading(this)}`;
+    }
 }
 
 function randomRGB() {
@@ -50,6 +31,25 @@ function randomRGB() {
     }
     return `rgb(${rgb.toString()})`;
 }
+
+function shading(thisCell) {
+    const rgb = (thisCell.style.backgroundColor);
+
+    let rgbArr = rgb.match(/\d+/g);  // string-to-array code from:
+    // username: "user372551"
+    // https://stackoverflow.com/questions/10970958/get-a-color-component-from-an-rgb-string-in-javascript
+
+    if (!rgbArr) {
+        rgbArr = [255, 255, 255];
+    }
+    for (i = 0; i < 3; i++) {
+        let rgbDarker = Math.floor(rgbArr[i] - (25));
+        if (rgbDarker < 0) {
+            rgbArr[i] = 0;
+        } else rgbArr[i] = rgbDarker;
+    }
+    return`rgb(${rgbArr.toString()})`;
+};
 
 const gridContainer = document.querySelector('.grid-container');
 const resizeButton = document.querySelector('#grid-size');
@@ -72,6 +72,5 @@ resizeButton.addEventListener('click', () => {
 blackButton.addEventListener('click', () => color = 'black');
 rainbowButton.addEventListener('click', () => color = 'rainbow');
 shadingButton.addEventListener('click', () => color = 'shading');
-
 
 drawGrid(gridSize);
