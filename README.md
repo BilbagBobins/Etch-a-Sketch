@@ -27,11 +27,11 @@ I put this function in the drawGrid function so that each cell when created woul
 ### RandomRGB
 This function was a fun little one to write. I needed to get 3 random values between 0 and 255 into an rgb() label. Initially I wrote it as 2 separate functions - one that wrote out the rgb value and the other that was called upon for each rgb random value : 
 
-const rgb = `rgb(${random()}, ${random()}, ${random()})`
+`const rgb = 'rgb(${random()}, ${random()}, ${random()})'`
 
 This worked but I felt it was clunky and could be refined. I came up with an alternative method that used an array and a FOR loop. Each iteration of the loop would call random() and insert that random value into the array. Then at the end it would turn the array into a string and concatenate it all:
 
-const rgb = `rgb(${rgbArr.toString()})`
+`const rgb = 'rgb(${rgbArr.toString()})'`
 
 ### Shading
 This function seemed easy enough to write but proved a bit tricky to implement - Determine the current cell rgb value and decrease each r, g and b value by 25 (roughly 10% of 255) each time the mouse passes over it.
