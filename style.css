@@ -1,16 +1,93 @@
 /* * {
-    border: solid red 1px;
+    border: solid rgb(0, 162, 255) 1px;
 } */
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Kanit';
+}
+
+.bg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url(img/wood.jpg); 
+    /* image source photo by Bernard Hermant on Unsplash */
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 .cell {
     border: solid rgb(221, 221, 221) 1px;
+    background-color: white;
 }
 
+.hero-text{
+    margin-bottom: 10px;
+    font-size: 40px;
+}
+
+.hero-text,
+.button-labels {
+    font-weight: bold;
+    color: rgb(252, 230, 159);
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+.border-container {
+    padding: 10px 60px 40px;
+    background-color: rgb(207, 49, 49);
+    border-radius: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 16px 20px 15px rgb(0 0 0 / 45%);
+}
 
 .grid-container {
     display: flex;
     flex-wrap: wrap;
-    width: 880px;
-    height: 880px;
-    border: solid rgb(255, 123, 0) 4px;
+    width: 720px;
+    height: 720px;
+}
+
+.button-labels {
+    width: 100%;
+    display: flex;
+    font-size: 20px;
+    margin: 20px 0 -10px 160px;
+}
+
+.button-container button {
+    height: 40px;
+    width: 120px;
+    color: rgba(0, 0, 0, 0.8);
+    background-color: rgb(252, 230, 159);
+    border-style: none;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.gridValue {
+    width: 180px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: bottom;
+    font-size: 20px;
+    color: rgb(252, 230, 159);
 }

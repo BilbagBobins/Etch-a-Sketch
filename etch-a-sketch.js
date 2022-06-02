@@ -1,10 +1,13 @@
 function drawGrid(size) {
+    // clear current if any grid so as to not draw multiple grids on the page
+    while (gridContainer.firstChild)
+        gridContainer.removeChild(gridContainer.firstChild);
     for (i = 0; i < size; i++){
         for (j = 0; j <size; j++){
             const gridCell = document.createElement('div');
             gridCell.classList.add('cell');
-            // 880 is the grid size. - 2 to account for cell border
-            const cellSize = ((880/size) - 2) + 'px';
+            // 720 is the grid size. - 2 to account for cell border
+            const cellSize = ((720/size) - 2) + 'px';
             gridCell.style.height = cellSize;
             gridCell.style.width =  cellSize;
             gridContainer.appendChild(gridCell);
@@ -49,25 +52,20 @@ function shading(thisCell) {
         } else rgbArr[i] = rgbDarker;
     }
     return`rgb(${rgbArr.toString()})`;
-};
+}
+
+function newGrid(newValue) {
+    document.getElementById('gridValue').innerHTML = newValue;
+}
 
 const gridContainer = document.querySelector('.grid-container');
-const resizeButton = document.querySelector('#grid-size');
+const resizeSlider = document.getElementById('grid-size');
 const blackButton = document.querySelector('#black');
 const rainbowButton = document.querySelector('#rainbow');
 const shadingButton = document.querySelector('#shading');
 
 let color = 'black';
 let gridSize = 16;
-
-resizeButton.addEventListener('click', () => {
-    do {
-    newSize = prompt('Enter a new grid size (Max 100)');
-    } while (newSize > 100)
-    while (gridContainer.firstChild)
-        gridContainer.removeChild(gridContainer.firstChild);
-    drawGrid(newSize)
-});
 
 blackButton.addEventListener('click', () => color = 'black');
 rainbowButton.addEventListener('click', () => color = 'rainbow');
