@@ -19,7 +19,7 @@
                     <div class="gridValue">
                         <span id="gridValue">16</span>
                         <input type="range" name="grid" min="1" max="100" step="1" value="16" 
-                                oninput="newGrid(this.value); drawGrid(this.value)" id="grid-size">
+                                oninput="newGrid(this.value)" onchange="drawGrid(this.value)" id="grid-size">
                     </div>
                     <button id="black">Black</button>
                     <button id="rainbow">Rainbow</button>
